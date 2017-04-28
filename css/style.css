@@ -1,20 +1,228 @@
-body {
-	background-color: #4286f4;
+*, *:before, *:after {
+	box-sizing: border-box;
 }
 
-
-h1 {
-	font-size: 40px;
-	font-style: italic;
-	font-weight: bold;
-	color: #FFF;
-	display: inline;
-	text-align: center;
-	margin-left: 25%;
-
-}
 
 .jukebox {
-	display: block;
-	align-items: center;
+	min-height: 100vh;
+	background: #4286f4;
+	padding-top: 45px; /* header height */
+	padding-bottom: 55px; /* controls height */
+	font-family: "Helvetica Neue", Helvetica, Arial, Sans;
+}
+
+
+.jukebox-header {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 45px;
+	padding: 0 15px;
+	background: #2958db;
+	border-bottom: 1px solid #152d70;
+	box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+}
+
+.jukebox-header-logo {
+	float: left;
+	margin-top: 10px;
+	height: 25px;
+	width: 160px;
+	background-image: url("../assets/logo1.png");
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+	opacity: 0.9;
+}
+
+.jukebox-controls-play {
+	background-image: url("../assets/play.svg");
+}
+
+.jukebox-header-upload {
+	float: right;
+	height: 45px;
+	width: 65px;
+	background-image: url('../assets/upload.svg');
+	background-size: auto 50%;
+	background-position: center;
+	background-repeat: no-repeat;
+	overflow: hidden;
+	text-indent: -999px;
+	cursor: pointer;
+}
+
+.jukebox-header-upload input {
+	position: relative;
+	top: -999px;
+}
+
+.jukebox-controls {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 65px;
+	padding: 0 15px;
+	background: #2958db;
+	border-top: 1px solid #152d70;
+	box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+	text-align: center;
+}
+
+.jukebox-controls-btn {
+	position: relative;
+	background: none;
+	border: none;
+	width: 65px;
+	height: 65px;
+	line-height: 45px;
+	padding: 0;
+	text-indent: -9999px;
+	background-size: 35% auto;
+	background-repeat: no-repeat;
+	background-position: center;
+	cursor: pointer;
+	outline: none;
+}
+
+.jukebox-controls-btn.isDisabled {
+	opacity: 0.7;
+	pointer-events: none;
+}
+
+.jukebox-controls-btn:active {
+	top: 1px;
+}
+
+.jukebox-controls-previous {
+	background-image: url("../assets/previous.svg");
+}
+
+.jukebox-controls-shuffle {
+	background-image: url("../assets/shuffle.svg");
+}
+
+.jukebox-controls-stop {
+	background-image: url("../assets/stop.svg");
+}
+
+.jukebox-controls-next {
+	background-image: url("../assets/next.svg");
+}
+
+.jukebox-controls-mute {
+	float: right;
+	background-image: url("../assets/volume-high.svg");
+}
+
+.jukebox-controls-play {
+	background-image: url("../assets/play.svg");
+	background-color: #000;
+	background-size: 45%;
+	background-position: 55% 50%;
+	box-shadow: 0 3px 4px -1px rgba(0, 0, 0, 0.25);
+	border-radius: 100%;
+
+	transform: translateY(-8px);
+	transition-property: box-shadow, background-color, transform;
+	transition-duration: 125ms;
+	transition-timing-function: ease;
+}
+.jukebox-controls-play:hover {
+	background-color: #1c1c1c;
+}
+
+.jukebox-controls-play:active {
+	transform: translateY(-6px);
+	box-shadow: 0 1px 2px -1px rgba(0, 0, 0, 0.9);
+}
+
+.jukebox-controls-play.isPlaying {
+	background-image: url("../assets/pause.svg");
+	background-position: center;
+	background-size: 40%;
+}
+/* SONGS */
+.jukebox-songs {
+	max-width: 880px;
+	width: 100%;
+	padding: 100px;
+	margin: 0 auto;
+}
+
+@keyframes song-slide-in {
+	0% {
+		opacity: 0;
+		transform: translateY(20px);
+	}
+	100% {
+		opacity: 1;
+		transform: translateY(0px);
+	}
+}
+
+.jukebox-songs-song {
+	padding: 0 8px;
+	height: 50px;
+	line-height: 50px;
+	margin-bottom: 10px;
+	background: #9db7f9;
+	border-radius: 25px;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12),
+	            0 1px 4px rgba(0, 0, 0, 0.24);
+	cursor: pointer;
+	transition: transform 100ms ease;
+}
+
+.jukebox-songs-song:hover {
+	transform: scale(1.1);
+}
+
+.jukebox-songs-song-pic,
+.jukebox-songs-song-title,
+.jukebox-songs-song-artist,
+.jukebox-songs-song-duration {
+	display: inline-block;
+	vertical-align: top;
+}
+
+.jukebox-songs-song-pic {
+	width: 32px;
+	height: 32px;
+	margin-top: 9px;
+	background-color: #CCC;
+	border-radius: 2px;
+	margin-right: 10px;
+}
+
+.jukebox-songs-song.isActive .jukebox-songs-song-pic {
+	background-color: #2958db;
+}
+
+.jukebox-songs-song-title {
+	margin-right: 10px;
+	font-size: 16px;
+	color: #222;
+}
+
+.jukebox-songs-song.isActive .jukebox-songs-song-title {
+	color: #2958db;
+}
+
+.jukebox-songs-song-artist {
+	color: #282828;
+
+}
+
+.jukebox-songs-song.isActive .jukebox-songs-song-artist {
+	color: #2958db;
+}
+
+.jukebox-songs-song-duration {
+	float: right;
+	font-size: 13px;
+	padding-right: 10px;
+	color: #000;
 }
