@@ -11,6 +11,18 @@
 	font-family: "Helvetica Neue", Helvetica, Arial, Sans;
 }
 
+.jukebox-header-soundcloud-upload{
+	float: right;
+	margin-top: 12px;
+
+}
+
+.soundcloud-song-image {
+	position: absolute;
+width:auto;
+height: auto;
+}
+
 
 .jukebox-header {
 	position: fixed;

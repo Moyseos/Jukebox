@@ -24,6 +24,8 @@ var Jukebox = {
 			"mute": $(".jukebox-controls-mute"),
 			"upload": $(".jukebox-header-upload input"),
 			"songs": $(".jukebox-songs"),
+
+			"scUpload": $(".jukebox-header-soundcloud-upload"),
 		};
 
 		this.addSong("./songs/CoastalBrake.mp3", {
@@ -68,6 +70,11 @@ var Jukebox = {
 		}.bind(this));
 
 		this.dom.stop.on("click", this.stop.bind(this));
+
+		this.dom.scUpload.on("input", function() {
+			this.addSong(this.dom.scUpload.val());
+			console.log(this);
+		}.bind(this));
 
 		this.dom.upload.on("change", function() {
 			var files = this.dom.upload.prop("files");
@@ -207,7 +214,8 @@ class Song {
 		this.$song.html("");
 		this.$song.append('<div class="jukebox-songs-song-pic"></div>');
 		this.$song.append('<div class="jukebox-songs-song-title">' + this.meta.title + '</div>');
-		this.$song.append('<div class="jukebox-songs-song-artist">' + this.meta.artist + '</div>');
+		this.$song.append('<div class="jukebox-songs-song-artist">' + '<a href= ' + this.meta.user + '>' + this.meta.artist + '</div>');
+		this.$song.append('<img class="soundcloud-image" src = ' + this.meta.image + '>');
 		this.$song.append('<div class="jukebox-songs-song-duration">' + "3:22" + '</div>');
 		this.$song.data("song", this);
 
@@ -257,6 +265,8 @@ class SoundCloudSong extends Song {
 			this.meta = {
 				title: song.title,
 				artist: song.user.username,
+				image: song.artwork_url,
+				user: song.permalink_url,
 			};
 			return song;
 		}.bind(this))
