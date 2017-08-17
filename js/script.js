@@ -215,8 +215,8 @@ class Song {
 		this.$song.append('<div class="jukebox-songs-song-pic"></div>');
 		this.$song.append('<div class="jukebox-songs-song-title">' + this.meta.title + '</div>');
 		this.$song.append('<div class="jukebox-songs-song-artist">' + '<a href= ' + this.meta.user + '>' + this.meta.artist + '</div>');
-		this.$song.append('<img class="soundcloud-image" src = ' + this.meta.image + '>');
-		this.$song.append('<div class="jukebox-songs-song-duration">' + "3:22" + '</div>');
+		this.$song.append('<img class="soundcloud-song-image" src = ' + this.meta.image + '>');
+		this.$song.append('<div class="jukebox-songs-song-duration">' + "3:33" + '</div>');
 		this.$song.data("song", this);
 
 		return this.$song;
@@ -267,6 +267,7 @@ class SoundCloudSong extends Song {
 				artist: song.user.username,
 				image: song.artwork_url,
 				user: song.permalink_url,
+				duration: song.duration,
 			};
 			return song;
 		}.bind(this))

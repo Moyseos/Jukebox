@@ -18,9 +18,8 @@
 }
 
 .soundcloud-song-image {
-	position: absolute;
-width:auto;
-height: auto;
+	width: 40px;
+	margin: 5px 0 2px 10px;
 }
 
 
